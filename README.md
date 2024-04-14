@@ -1,4 +1,4 @@
-# Matching
+# Number Matching
 
 ## Overview
 This repo is for the software implementation of the children's classic game of Matching. This software will allow two players to play against each other. A description of the game plus the requirements of this implementation are provided below.
