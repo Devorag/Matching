@@ -100,8 +100,10 @@ namespace MatchingGame
 
         private void AssignIconsToSquares()
         {
+//AS Why do you need a try catch?
             try
             {
+//AS Why do you have to instantiate the list of icons again?
                 icons = new List<string>
                 {
                     "!", "!", "N", "N", ",", ",", "k", "k",
@@ -137,6 +139,7 @@ namespace MatchingGame
 
         private void Label_Click(object? sender, EventArgs e)
         {
+//AS Code should be moved out of event handler into a procedure and called from here.
             if (tmr.Enabled == true)
                 return;
 
@@ -171,6 +174,7 @@ namespace MatchingGame
 
         private void BtnStart_Click(object? sender, EventArgs e)
         {
+//AS Why do you need a try catch?
             try
             {
                 ClearBoard(); // Clear the board
@@ -181,7 +185,7 @@ namespace MatchingGame
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+//AS Move procedure up above the event handlers
         private void ClearBoard()
         {
             foreach (Control control in tblBoard.Controls)
