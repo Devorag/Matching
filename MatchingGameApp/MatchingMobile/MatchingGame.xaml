@@ -11,10 +11,10 @@
     </ContentPage.Resources>
 
     <Grid RowDefinitions="*,6*">
-        <Button Margin="2" Grid.Row="0" Text="Click Here to Start" TextTransform="Uppercase" TextColor="White" FontSize="Medium" BackgroundColor="#E4F0ED" HorizontalOptions="FillAndExpand"/>
-        <Grid Margin="2" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*"  ColumnSpacing="2" RowSpacing="2" Grid.Row="1">
+        <Button Margin="2" Grid.Row="0" Text="Click Here to Start" TextTransform="Uppercase" TextColor="Black" FontSize="Medium" BackgroundColor="#E4F0ED" HorizontalOptions="FillAndExpand"/>
+        <Grid Margin="2" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*"  ColumnSpacing="2" RowSpacing="2" Grid.Row="1">
             <Button Grid.Column="0" Grid.Row="0"/>
-            <Button Grid.Column="1" Grid.Row="0"/>
+            <Button Grid.Column="1" Grid.Row="0"/> 
             <Button Grid.Column="2" Grid.Row="0"/>
             <Button Grid.Column="3" Grid.Row="0"/>
             <Button Grid.Column="0" Grid.Row="1"/>
