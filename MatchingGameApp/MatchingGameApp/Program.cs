@@ -1,4 +1,6 @@
-namespace MatchingGame
+using MatchingGame;
+
+namespace MatchingGameApp
 {
     internal static class Program
     {

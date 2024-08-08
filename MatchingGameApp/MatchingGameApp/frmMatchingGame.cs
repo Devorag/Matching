@@ -61,8 +61,8 @@ namespace MatchingGame
                 if (iconLabel != null)
                 {
                     iconLabel.BackColor = Color.CornflowerBlue;
-                    iconLabel.ForeColor = iconLabel.BackColor; // Hide text initially
-                    iconLabel.Text = string.Empty; // Ensure no text is displayed initially
+                    iconLabel.ForeColor = iconLabel.BackColor;
+                    iconLabel.Text = string.Empty;
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace MatchingGame
                         return;
                 }
             }
-            MessageBox.Show("You matched all the pictures!");
+            MessageBox.Show("You matched all the pictures!", "Congratulations!");
             ControlsDisabled();
         }
 
@@ -105,7 +105,7 @@ namespace MatchingGame
                 icons = new List<string>
                 {
                     "!", "!", "N", "N", ",", ",", "k", "k",
-                    "b", "b", "v", "v", "w", "W", "z", "z"
+                    "b", "b", "v", "v", "w", "w", "z", "z"
                 };
 
                 foreach (Control control in tblBoard.Controls)
@@ -115,7 +115,7 @@ namespace MatchingGame
                     {
                         int randomNumber = random.Next(icons.Count);
                         iconLabel.Text = icons[randomNumber];
-                        iconLabel.ForeColor = iconLabel.BackColor; // Hide the text initially
+                        iconLabel.ForeColor = iconLabel.BackColor; 
                         icons.RemoveAt(randomNumber);
                     }
                 }
@@ -173,8 +173,8 @@ namespace MatchingGame
         {
             try
             {
-                ClearBoard(); // Clear the board
-                Start(); // Start the game
+                ClearBoard();
+                Start();
             }
             catch (Exception ex)
             {
@@ -189,9 +189,9 @@ namespace MatchingGame
                 Label iconLabel = control as Label;
                 if (iconLabel != null)
                 {
-                    iconLabel.Text = string.Empty; // Clear the text
-                    iconLabel.BackColor = Color.CornflowerBlue; // Set the initial background color to blue
-                    iconLabel.ForeColor = iconLabel.BackColor; // Hide the text
+                    iconLabel.Text = string.Empty; 
+                    iconLabel.BackColor = Color.CornflowerBlue; 
+                    iconLabel.ForeColor = iconLabel.BackColor; 
                 }
             }
         }
