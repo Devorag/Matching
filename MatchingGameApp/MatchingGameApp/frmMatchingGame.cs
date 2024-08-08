@@ -11,11 +11,7 @@ namespace MatchingGame
         Random random = new Random();
         Label firstClicked = null;
         Label secondClicked = null;
-        List<string> icons = new()
-        {
-            "!", "!", "N", "N", ",", ",", "k", "k",
-            "b", "b", "v", "v", "w", "w", "z", "z"
-        };
+
 
         public frmMatchingGame()
         {
@@ -51,6 +47,21 @@ namespace MatchingGame
             }
             AssignIconsToSquares();
             ControlsEnabled();
+        }
+
+        //AS Move procedure up above the event handlers
+        private void ClearBoard()
+        {
+            foreach (Control control in tblBoard.Controls)
+            {
+                Label iconLabel = control as Label;
+                if (iconLabel != null)
+                {
+                    iconLabel.Text = string.Empty;
+                    iconLabel.BackColor = Color.CornflowerBlue;
+                    iconLabel.ForeColor = iconLabel.BackColor;
+                }
+            }
         }
 
         private void InitialSetup()
@@ -100,33 +111,57 @@ namespace MatchingGame
 
         private void AssignIconsToSquares()
         {
-//AS Why do you need a try catch?
-            try
+            //AS Why do you have to instantiate the list of icons again?
+            List<string> icons = new()
             {
-//AS Why do you have to instantiate the list of icons again?
-                icons = new List<string>
-                {
-                    "!", "!", "N", "N", ",", ",", "k", "k",
-                    "b", "b", "v", "v", "w", "w", "z", "z"
-                };
+            "!", "!", "N", "N", ",", ",", "k", "k",
+            "b", "b", "v", "v", "w", "w", "z", "z"
+            };
 
-                foreach (Control control in tblBoard.Controls)
+            foreach (Control control in tblBoard.Controls)
+            {
+                Label iconLabel = (Label)control;
+                if (iconLabel != null)
                 {
-                    Label iconLabel = (Label)control;
-                    if (iconLabel != null)
-                    {
-                        int randomNumber = random.Next(icons.Count);
-                        iconLabel.Text = icons[randomNumber];
-                        iconLabel.ForeColor = iconLabel.BackColor; 
-                        icons.RemoveAt(randomNumber);
-                    }
+                    int randomNumber = random.Next(icons.Count);
+                    iconLabel.Text = icons[randomNumber];
+                    iconLabel.ForeColor = iconLabel.BackColor;
+                    icons.RemoveAt(randomNumber);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while assigning icons: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
         }
+
+        private void LabelClick(Label clickedLbl)
+        {
+            //AS Code should be moved out of event handler into a procedure and called from here.
+            if (tmr.Enabled == true)
+                return;
+
+            if (clickedLbl.ForeColor == Color.Black)
+                return;
+
+            if (firstClicked == null)
+            {
+                firstClicked = clickedLbl;
+                firstClicked.ForeColor = Color.Black;
+                return;
+            }
+
+            secondClicked = clickedLbl;
+            secondClicked.ForeColor = Color.Black;
+            CheckForWinner();
+
+            if (firstClicked.Text == secondClicked.Text)
+            {
+                firstClicked = null;
+                secondClicked = null;
+                return;
+            }
+
+            tmr.Start();
+        }
+
 
         private void Tmr_Tick(object? sender, EventArgs e)
         {
@@ -139,65 +174,20 @@ namespace MatchingGame
 
         private void Label_Click(object? sender, EventArgs e)
         {
-//AS Code should be moved out of event handler into a procedure and called from here.
-            if (tmr.Enabled == true)
-                return;
-
-            Label clickedLbl = (Label)sender;
-
-            if (clickedLbl != null)
+            if (sender is Label clickedLbl)
             {
-                if (clickedLbl.ForeColor == Color.Black)
-                {
-                    return;
-                }
-                if (firstClicked == null)
-                {
-                    firstClicked = clickedLbl;
-                    firstClicked.ForeColor = Color.Black;
-                    return;
-                }
-
-                secondClicked = clickedLbl;
-                secondClicked.ForeColor = Color.Black;
-                CheckForWinner();
-
-                if (firstClicked.Text == secondClicked.Text)
-                {
-                    firstClicked = null;
-                    secondClicked = null;
-                    return;
-                }
-                tmr.Start();
+                LabelClick(clickedLbl);
             }
         }
+
 
         private void BtnStart_Click(object? sender, EventArgs e)
         {
-//AS Why do you need a try catch?
-            try
-            {
-                ClearBoard();
-                Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-//AS Move procedure up above the event handlers
-        private void ClearBoard()
-        {
-            foreach (Control control in tblBoard.Controls)
-            {
-                Label iconLabel = control as Label;
-                if (iconLabel != null)
-                {
-                    iconLabel.Text = string.Empty; 
-                    iconLabel.BackColor = Color.CornflowerBlue; 
-                    iconLabel.ForeColor = iconLabel.BackColor; 
-                }
-            }
+            //AS Why do you need a try catch?
+
+            ClearBoard();
+            Start();
+
         }
     }
 }
