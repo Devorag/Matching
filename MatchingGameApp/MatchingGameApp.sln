@@ -5,7 +5,11 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchingGameApp", "MatchingGameApp\MatchingGameApp.csproj", "{D27D9996-BADF-48D2-878E-54F8A2900AA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchingMobile", "MatchingMobile\MatchingMobile.csproj", "{DE4386F3-6BE8-43E8-A8FB-74213DB357C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchingMobile", "MatchingMobile\MatchingMobile.csproj", "{DE4386F3-6BE8-43E8-A8FB-74213DB357C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchingSystem", "MatcingSystem\MatchingSystem.csproj", "{53F30500-D878-4CF5-8EB9-6E65F45D72FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchingTest", "MatchingTest\MatchingTest.csproj", "{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +27,14 @@ Global
 		{DE4386F3-6BE8-43E8-A8FB-74213DB357C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE4386F3-6BE8-43E8-A8FB-74213DB357C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE4386F3-6BE8-43E8-A8FB-74213DB357C6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{53F30500-D878-4CF5-8EB9-6E65F45D72FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F30500-D878-4CF5-8EB9-6E65F45D72FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F30500-D878-4CF5-8EB9-6E65F45D72FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F30500-D878-4CF5-8EB9-6E65F45D72FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

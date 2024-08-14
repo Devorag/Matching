@@ -32,22 +32,22 @@
             tblStart = new TableLayoutPanel();
             BtnStart = new Button();
             tblBoard = new TableLayoutPanel();
-            label16 = new Label();
-            label15 = new Label();
-            label14 = new Label();
-            label13 = new Label();
-            label12 = new Label();
-            label11 = new Label();
-            label10 = new Label();
-            label9 = new Label();
-            label8 = new Label();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
+            lbl16 = new Label();
+            lbl15 = new Label();
+            lbl14 = new Label();
+            lbl13 = new Label();
+            lbl12 = new Label();
+            lbl11 = new Label();
+            lbl10 = new Label();
+            lbl9 = new Label();
+            lbl8 = new Label();
+            lbl7 = new Label();
+            lbl6 = new Label();
+            lbl5 = new Label();
+            lbl4 = new Label();
+            lbl3 = new Label();
+            lbl2 = new Label();
+            lbl1 = new Label();
             tableLayoutPanel1.SuspendLayout();
             tblStart.SuspendLayout();
             tblBoard.SuspendLayout();
@@ -103,22 +103,22 @@
             tblBoard.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tblBoard.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tblBoard.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tblBoard.Controls.Add(label16, 3, 3);
-            tblBoard.Controls.Add(label15, 2, 3);
-            tblBoard.Controls.Add(label14, 1, 3);
-            tblBoard.Controls.Add(label13, 0, 3);
-            tblBoard.Controls.Add(label12, 3, 2);
-            tblBoard.Controls.Add(label11, 2, 2);
-            tblBoard.Controls.Add(label10, 1, 2);
-            tblBoard.Controls.Add(label9, 0, 2);
-            tblBoard.Controls.Add(label8, 3, 1);
-            tblBoard.Controls.Add(label7, 2, 1);
-            tblBoard.Controls.Add(label6, 1, 1);
-            tblBoard.Controls.Add(label5, 0, 1);
-            tblBoard.Controls.Add(label4, 3, 0);
-            tblBoard.Controls.Add(label3, 2, 0);
-            tblBoard.Controls.Add(label2, 1, 0);
-            tblBoard.Controls.Add(label1, 0, 0);
+            tblBoard.Controls.Add(lbl16, 3, 3);
+            tblBoard.Controls.Add(lbl15, 2, 3);
+            tblBoard.Controls.Add(lbl14, 1, 3);
+            tblBoard.Controls.Add(lbl13, 0, 3);
+            tblBoard.Controls.Add(lbl12, 3, 2);
+            tblBoard.Controls.Add(lbl11, 2, 2);
+            tblBoard.Controls.Add(lbl10, 1, 2);
+            tblBoard.Controls.Add(lbl9, 0, 2);
+            tblBoard.Controls.Add(lbl8, 3, 1);
+            tblBoard.Controls.Add(lbl7, 2, 1);
+            tblBoard.Controls.Add(lbl6, 1, 1);
+            tblBoard.Controls.Add(lbl5, 0, 1);
+            tblBoard.Controls.Add(lbl4, 3, 0);
+            tblBoard.Controls.Add(lbl3, 2, 0);
+            tblBoard.Controls.Add(lbl2, 1, 0);
+            tblBoard.Controls.Add(lbl1, 0, 0);
             tblBoard.Dock = DockStyle.Fill;
             tblBoard.Location = new Point(3, 80);
             tblBoard.Name = "tblBoard";
@@ -130,181 +130,180 @@
             tblBoard.Size = new Size(643, 513);
             tblBoard.TabIndex = 2;
             // 
-            // label16
+            // lbl16
             // 
-            label16.Dock = DockStyle.Fill;
-            label16.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label16.Location = new Point(485, 383);
-            label16.Name = "label16";
-            label16.Size = new Size(153, 128);
-            label16.TabIndex = 15;
-            label16.Text = "c";
-            label16.TextAlign = ContentAlignment.MiddleCenter;
+            lbl16.Dock = DockStyle.Fill;
+            lbl16.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl16.Location = new Point(485, 383);
+            lbl16.Name = "lbl16";
+            lbl16.Size = new Size(153, 128);
+            lbl16.TabIndex = 15;
+            lbl16.Text = "c";
+            lbl16.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label15
+            // lbl15
             // 
-            label15.Dock = DockStyle.Fill;
-            label15.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label15.Location = new Point(325, 383);
-            label15.Name = "label15";
-            label15.Size = new Size(152, 128);
-            label15.TabIndex = 14;
-            label15.Text = "c";
-            label15.TextAlign = ContentAlignment.MiddleCenter;
+            lbl15.Dock = DockStyle.Fill;
+            lbl15.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl15.Location = new Point(325, 383);
+            lbl15.Name = "lbl15";
+            lbl15.Size = new Size(152, 128);
+            lbl15.TabIndex = 14;
+            lbl15.Text = "c";
+            lbl15.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label14
+            // lbl14
             // 
-            label14.Dock = DockStyle.Fill;
-            label14.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label14.Location = new Point(165, 383);
-            label14.Name = "label14";
-            label14.Size = new Size(152, 128);
-            label14.TabIndex = 13;
-            label14.Text = "c";
-            label14.TextAlign = ContentAlignment.MiddleCenter;
+            lbl14.Dock = DockStyle.Fill;
+            lbl14.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl14.Location = new Point(165, 383);
+            lbl14.Name = "lbl14";
+            lbl14.Size = new Size(152, 128);
+            lbl14.TabIndex = 13;
+            lbl14.Text = "c";
+            lbl14.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label13
+            // lbl13
             // 
-            label13.Dock = DockStyle.Fill;
-            label13.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label13.Location = new Point(5, 383);
-            label13.Name = "label13";
-            label13.Size = new Size(152, 128);
-            label13.TabIndex = 12;
-            label13.Text = "c";
-            label13.TextAlign = ContentAlignment.MiddleCenter;
+            lbl13.Dock = DockStyle.Fill;
+            lbl13.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl13.Location = new Point(5, 383);
+            lbl13.Name = "lbl13";
+            lbl13.Size = new Size(152, 128);
+            lbl13.TabIndex = 12;
+            lbl13.Text = "c";
+            lbl13.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label12
+            // lbl12
             // 
-            label12.Dock = DockStyle.Fill;
-            label12.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label12.Location = new Point(485, 256);
-            label12.Name = "label12";
-            label12.Size = new Size(153, 125);
-            label12.TabIndex = 11;
-            label12.Text = "c";
-            label12.TextAlign = ContentAlignment.MiddleCenter;
+            lbl12.Dock = DockStyle.Fill;
+            lbl12.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl12.Location = new Point(485, 256);
+            lbl12.Name = "lbl12";
+            lbl12.Size = new Size(153, 125);
+            lbl12.TabIndex = 11;
+            lbl12.Text = "c";
+            lbl12.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label11
+            // lbl11
             // 
-            label11.Dock = DockStyle.Fill;
-            label11.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label11.Location = new Point(325, 256);
-            label11.Name = "label11";
-            label11.Size = new Size(152, 125);
-            label11.TabIndex = 10;
-            label11.Text = "c";
-            label11.TextAlign = ContentAlignment.MiddleCenter;
+            lbl11.Dock = DockStyle.Fill;
+            lbl11.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl11.Location = new Point(325, 256);
+            lbl11.Name = "lbl11";
+            lbl11.Size = new Size(152, 125);
+            lbl11.TabIndex = 10;
+            lbl11.Text = "c";
+            lbl11.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label10
+            // lbl10
             // 
-            label10.Dock = DockStyle.Fill;
-            label10.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label10.Location = new Point(165, 256);
-            label10.Name = "label10";
-            label10.Size = new Size(152, 125);
-            label10.TabIndex = 9;
-            label10.Text = "c";
-            label10.TextAlign = ContentAlignment.MiddleCenter;
+            lbl10.Dock = DockStyle.Fill;
+            lbl10.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl10.Location = new Point(165, 256);
+            lbl10.Name = "lbl10";
+            lbl10.Size = new Size(152, 125);
+            lbl10.TabIndex = 9;
+            lbl10.Text = "c";
+            lbl10.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label9
+            // lbl9
             // 
-            label9.Dock = DockStyle.Fill;
-            label9.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label9.Location = new Point(5, 256);
-            label9.Name = "label9";
-            label9.Size = new Size(152, 125);
-            label9.TabIndex = 8;
-            label9.Text = "c";
-            label9.TextAlign = ContentAlignment.MiddleCenter;
+            lbl9.Dock = DockStyle.Fill;
+            lbl9.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl9.Location = new Point(5, 256);
+            lbl9.Name = "lbl9";
+            lbl9.Size = new Size(152, 125);
+            lbl9.TabIndex = 8;
+            lbl9.Text = "c";
+            lbl9.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label8
+            // lbl8
             // 
-            label8.Dock = DockStyle.Fill;
-            label8.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label8.Location = new Point(485, 129);
-            label8.Name = "label8";
-            label8.Size = new Size(153, 125);
-            label8.TabIndex = 7;
-            label8.Text = "c";
-            label8.TextAlign = ContentAlignment.MiddleCenter;
+            lbl8.Dock = DockStyle.Fill;
+            lbl8.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl8.Location = new Point(485, 129);
+            lbl8.Name = "lbl8";
+            lbl8.Size = new Size(153, 125);
+            lbl8.TabIndex = 7;
+            lbl8.Text = "c";
+            lbl8.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // lbl7
             // 
-            label7.Dock = DockStyle.Fill;
-            label7.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label7.Location = new Point(325, 129);
-            label7.Name = "label7";
-            label7.Size = new Size(152, 125);
-            label7.TabIndex = 6;
-            label7.Text = "c";
-            label7.TextAlign = ContentAlignment.MiddleCenter;
+            lbl7.Dock = DockStyle.Fill;
+            lbl7.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl7.Location = new Point(325, 129);
+            lbl7.Name = "lbl7";
+            lbl7.Size = new Size(152, 125);
+            lbl7.TabIndex = 6;
+            lbl7.Text = "c";
+            lbl7.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label6
+            // lbl6
             // 
-            label6.Dock = DockStyle.Fill;
-            label6.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label6.Location = new Point(165, 129);
-            label6.Name = "label6";
-            label6.Size = new Size(152, 125);
-            label6.TabIndex = 5;
-            label6.Text = "c";
-            label6.TextAlign = ContentAlignment.MiddleCenter;
+            lbl6.Dock = DockStyle.Fill;
+            lbl6.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl6.Location = new Point(165, 129);
+            lbl6.Name = "lbl6";
+            lbl6.Size = new Size(152, 125);
+            lbl6.TabIndex = 5;
+            lbl6.Text = "c";
+            lbl6.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label5
+            // lbl5
             // 
-            label5.Dock = DockStyle.Fill;
-            label5.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label5.Location = new Point(5, 129);
-            label5.Name = "label5";
-            label5.Size = new Size(152, 125);
-            label5.TabIndex = 4;
-            label5.Text = "c";
-            label5.TextAlign = ContentAlignment.MiddleCenter;
+            lbl5.Dock = DockStyle.Fill;
+            lbl5.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl5.Location = new Point(5, 129);
+            lbl5.Name = "lbl5";
+            lbl5.Size = new Size(152, 125);
+            lbl5.TabIndex = 4;
+            lbl5.Text = "c";
+            lbl5.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // lbl4
             // 
-            label4.Dock = DockStyle.Fill;
-            label4.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label4.Location = new Point(485, 2);
-            label4.Name = "label4";
-            label4.Size = new Size(153, 125);
-            label4.TabIndex = 3;
-            label4.Text = "c";
-            label4.TextAlign = ContentAlignment.MiddleCenter;
+            lbl4.Dock = DockStyle.Fill;
+            lbl4.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl4.Location = new Point(485, 2);
+            lbl4.Name = "lbl4";
+            lbl4.Size = new Size(153, 125);
+            lbl4.TabIndex = 3;
+            lbl4.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label3
+            // lbl3
             // 
-            label3.Dock = DockStyle.Fill;
-            label3.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label3.Location = new Point(325, 2);
-            label3.Name = "label3";
-            label3.Size = new Size(152, 125);
-            label3.TabIndex = 2;
-            label3.Text = "c";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
+            lbl3.Dock = DockStyle.Fill;
+            lbl3.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl3.Location = new Point(325, 2);
+            lbl3.Name = "lbl3";
+            lbl3.Size = new Size(152, 125);
+            lbl3.TabIndex = 2;
+            lbl3.Text = "c";
+            lbl3.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // lbl2
             // 
-            label2.Dock = DockStyle.Fill;
-            label2.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label2.Location = new Point(165, 2);
-            label2.Name = "label2";
-            label2.Size = new Size(152, 125);
-            label2.TabIndex = 1;
-            label2.Text = "c";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
+            lbl2.Dock = DockStyle.Fill;
+            lbl2.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl2.Location = new Point(165, 2);
+            lbl2.Name = "lbl2";
+            lbl2.Size = new Size(152, 125);
+            lbl2.TabIndex = 1;
+            lbl2.Text = "c";
+            lbl2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // lbl1
             // 
-            label1.Dock = DockStyle.Fill;
-            label1.Font = new Font("Webdings", 48F, FontStyle.Bold);
-            label1.Location = new Point(5, 2);
-            label1.Name = "label1";
-            label1.Size = new Size(152, 125);
-            label1.TabIndex = 0;
-            label1.Text = "c";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            lbl1.Dock = DockStyle.Fill;
+            lbl1.Font = new Font("Webdings", 48F, FontStyle.Bold);
+            lbl1.Location = new Point(5, 2);
+            lbl1.Name = "lbl1";
+            lbl1.Size = new Size(152, 125);
+            lbl1.TabIndex = 0;
+            lbl1.Text = "c";
+            lbl1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // frmMatchingGame
             // 
@@ -326,21 +325,21 @@
         private TableLayoutPanel tblStart;
         private Button BtnStart;
         private TableLayoutPanel tblBoard;
-        private Label label16;
-        private Label label15;
-        private Label label14;
-        private Label label13;
-        private Label label12;
-        private Label label11;
-        private Label label10;
-        private Label label9;
-        private Label label8;
-        private Label label7;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private Label label1;
+        private Label lbl16;
+        private Label lbl15;
+        private Label lbl14;
+        private Label lbl13;
+        private Label lbl12;
+        private Label lbl11;
+        private Label lbl10;
+        private Label lbl9;
+        private Label lbl8;
+        private Label lbl7;
+        private Label lbl6;
+        private Label lbl5;
+        private Label lbl4;
+        private Label lbl3;
+        private Label lbl2;
+        private Label lbl1;
     }
 }

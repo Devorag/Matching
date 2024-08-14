@@ -4,32 +4,35 @@
              x:Class="MatchingMobile.MatchingGame"
              Title="MatchingGame">
     <ContentPage.Resources>
-        <Style TargetType="Button">
-            <Setter Property="CornerRadius" Value="10"/>
-            <Setter Property="BackgroundColor" Value="#BEECFF"/>
+        <Style TargetType="Button" x:Key="game-button">
+            <Setter Property="FontFamily" Value="WEBDINGS"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Black"/>
         </Style>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="*,6*">
-        <Button Margin="2" Grid.Row="0" Text="Click Here to Start" TextTransform="Uppercase" TextColor="Black" FontSize="Medium" BackgroundColor="#E4F0ED" HorizontalOptions="FillAndExpand"/>
-        <Grid Margin="2" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*"  ColumnSpacing="2" RowSpacing="2" Grid.Row="1">
-            <Button Grid.Column="0" Grid.Row="0"/>
-            <Button Grid.Column="1" Grid.Row="0"/> 
-            <Button Grid.Column="2" Grid.Row="0"/>
-            <Button Grid.Column="3" Grid.Row="0"/>
-            <Button Grid.Column="0" Grid.Row="1"/>
-            <Button Grid.Column="1" Grid.Row="1"/>
-            <Button Grid.Column="2" Grid.Row="1"/>
-            <Button Grid.Column="3" Grid.Row="1"/>
-            <Button Grid.Column="0" Grid.Row="1"/>
-            <Button Grid.Column="0" Grid.Row="2"/>
-            <Button Grid.Column="1" Grid.Row="2"/>
-            <Button Grid.Column="2" Grid.Row="2"/>
-            <Button Grid.Column="3" Grid.Row="2"/>
-            <Button Grid.Column="0" Grid.Row="3"/>
-            <Button Grid.Column="1" Grid.Row="3"/>
-            <Button Grid.Column="2" Grid.Row="3"/>
-            <Button Grid.Column="3" Grid.Row="3"/>
+    <Grid RowDefinitions="Auto,*,6*">
+        <Label x:Name="Messagelbl" Grid.Row="0" FontSize="Medium" TextColor="Red" />
+        <Button x:Name="StartBtn" Margin="2" Grid.Row="1" Text="Click here to start" FontSize="Large" TextTransform="Uppercase" TextColor="white" BackgroundColor="MediumAquamarine"  HorizontalOptions="FillAndExpand" Clicked="StartBtn_Clicked_1"/>
+        <Grid Margin="2" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*"  ColumnSpacing="2" RowSpacing="2" Grid.Row="2">
+            <Button x:Name="btn1" Grid.Column="0" Grid.Row="0" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[0]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}"  Clicked="btn_Clicked"/>
+            <Button x:Name="btn2" Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[1]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn3" Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[2]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn4" Grid.Column="3" Grid.Row="0" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[3]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn5" Grid.Column="0" Grid.Row="1" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[4]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn6" Grid.Column="1" Grid.Row="1" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[5]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn7" Grid.Column="2" Grid.Row="1" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[6]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn8" Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[7]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn9" Grid.Column="0" Grid.Row="2" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[8]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn10" Grid.Column="1" Grid.Row="2" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[9]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn11" Grid.Column="2" Grid.Row="2" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[10]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn12" Grid.Column="3" Grid.Row="2" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[11]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn13" Grid.Column="0" Grid.Row="3" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[12]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn14" Grid.Column="1" Grid.Row="3" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[13]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn15" Grid.Column="2" Grid.Row="3" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[14]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
+            <Button x:Name="btn16" Grid.Column="3" Grid.Row="3" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[15]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked" />
         </Grid>
     </Grid>
 </ContentPage>
+    

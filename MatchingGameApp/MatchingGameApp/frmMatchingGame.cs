@@ -1,89 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using MatchingSystem;
 
 namespace MatchingGame
 {
     public partial class frmMatchingGame : Form
     {
-        System.Windows.Forms.Timer tmr = new() { Interval = 950 };
-        Random random = new Random();
-        Label firstClicked = null;
-        Label secondClicked = null;
-
+        private Game game = new();
+        private List<Label> lstLabels;
+        private System.Windows.Forms.Timer timer = new() { Interval = 950 };
+        private bool isProcessing = false;
 
         public frmMatchingGame()
         {
             InitializeComponent();
-            InitialSetup();
-            ControlsDisabled();
+            lstLabels = new() { lbl1, lbl2, lbl3, lbl4, lbl5, lbl6, lbl7, lbl8, lbl9, lbl10, lbl11, lbl12, lbl13, lbl14, lbl15, lbl16 };
+            InitializeGameBoard();
 
-            foreach (Control c in tblBoard.Controls)
+            game.OnMismatch += HandleMismatch;
+            game.OnGameComplete += async () => await Game_OnGameComplete();
+
+            for (int i = 0; i < lstLabels.Count; i++)
             {
-                if (c is Label)
-                {
-                    c.Click += Label_Click;
-                }
+                var label = lstLabels[i];
+                label.Tag = i;
+                label.Click += Label_Click;
             }
 
-            tmr.Tick += Tmr_Tick;
+            timer.Tick += Timer_Tick;
             BtnStart.Click += BtnStart_Click;
         }
 
-        private void Start()
+        private async Task Game_OnGameComplete()
         {
-            foreach (Control c in tblBoard.Controls)
+            if (isProcessing) return;
+            await Task.Delay(200);
+            MessageBox.Show("Congratulations! You've matched all the cards!", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void InitializeGameBoard()
+        {
+            lstLabels.ForEach(lbl =>
             {
-                Label iconLabel = (Label)c;
-                if (iconLabel != null)
-                {
-                    if (iconLabel.ForeColor != iconLabel.BackColor)
-                    {
-                        iconLabel.ForeColor = iconLabel.BackColor;
-                        return;
-                    }
-                }
+                lbl.BackColor = Color.CornflowerBlue;
+                lbl.ForeColor = Color.CornflowerBlue;
+                lbl.Text = string.Empty;
+                lbl.Enabled = false;
+            });
+            BtnStart.Enabled = true;
+        }
+
+        private void StartGame()
+        {
+            game.StartGame();
+            for (int i = 0; i < lstLabels.Count; i++)
+            {
+                var square = game.squares[i];
+                var label = lstLabels[i];
+                label.Tag = i;
+                label.BackColor = square.BackColor;
+                label.ForeColor = square.ForeColor;
+                label.Text = square.Text;
             }
-            AssignIconsToSquares();
             ControlsEnabled();
-        }
-
-        //AS Move procedure up above the event handlers
-        private void ClearBoard()
-        {
-            foreach (Control control in tblBoard.Controls)
-            {
-                Label iconLabel = control as Label;
-                if (iconLabel != null)
-                {
-                    iconLabel.Text = string.Empty;
-                    iconLabel.BackColor = Color.CornflowerBlue;
-                    iconLabel.ForeColor = iconLabel.BackColor;
-                }
-            }
-        }
-
-        private void InitialSetup()
-        {
-            foreach (Control c in tblBoard.Controls)
-            {
-                Label iconLabel = (Label)c;
-                if (iconLabel != null)
-                {
-                    iconLabel.BackColor = Color.CornflowerBlue;
-                    iconLabel.ForeColor = iconLabel.BackColor;
-                    iconLabel.Text = string.Empty;
-                }
-            }
-        }
-
-        private void ControlsDisabled()
-        {
-            foreach (Control c in tblBoard.Controls)
-            {
-                c.Enabled = false;
-            }
         }
 
         private void ControlsEnabled()
@@ -92,103 +69,50 @@ namespace MatchingGame
             {
                 c.Enabled = true;
             }
+            BtnStart.Enabled = true;
         }
 
-        private void CheckForWinner()
+        private void HandleMismatch()
         {
-            foreach (Control control in tblBoard.Controls)
-            {
-                Label iconLabel = (Label)control;
-                if (iconLabel != null)
-                {
-                    if (iconLabel.ForeColor == iconLabel.BackColor)
-                        return;
-                }
-            }
-            MessageBox.Show("You matched all the pictures!", "Congratulations!");
-            ControlsDisabled();
-        }
-
-        private void AssignIconsToSquares()
-        {
-            //AS Why do you have to instantiate the list of icons again?
-            List<string> icons = new()
-            {
-            "!", "!", "N", "N", ",", ",", "k", "k",
-            "b", "b", "v", "v", "w", "w", "z", "z"
-            };
-
-            foreach (Control control in tblBoard.Controls)
-            {
-                Label iconLabel = (Label)control;
-                if (iconLabel != null)
-                {
-                    int randomNumber = random.Next(icons.Count);
-                    iconLabel.Text = icons[randomNumber];
-                    iconLabel.ForeColor = iconLabel.BackColor;
-                    icons.RemoveAt(randomNumber);
-                }
-            }
-
-        }
-
-        private void LabelClick(Label clickedLbl)
-        {
-            //AS Code should be moved out of event handler into a procedure and called from here.
-            if (tmr.Enabled == true)
-                return;
-
-            if (clickedLbl.ForeColor == Color.Black)
-                return;
-
-            if (firstClicked == null)
-            {
-                firstClicked = clickedLbl;
-                firstClicked.ForeColor = Color.Black;
-                return;
-            }
-
-            secondClicked = clickedLbl;
-            secondClicked.ForeColor = Color.Black;
-            CheckForWinner();
-
-            if (firstClicked.Text == secondClicked.Text)
-            {
-                firstClicked = null;
-                secondClicked = null;
-                return;
-            }
-
-            tmr.Start();
-        }
-
-
-        private void Tmr_Tick(object? sender, EventArgs e)
-        {
-            tmr.Stop();
-            firstClicked.ForeColor = firstClicked.BackColor;
-            secondClicked.ForeColor = secondClicked.BackColor;
-            firstClicked = null;
-            secondClicked = null;
+            timer.Start();
         }
 
         private void Label_Click(object? sender, EventArgs e)
         {
-            if (sender is Label clickedLbl)
+            if (isProcessing) return;
+
+            if (sender is Label clickedLabel && clickedLabel.Tag is int index)
             {
-                LabelClick(clickedLbl);
+                game.HandleLabelClick(index);
+                clickedLabel.ForeColor = game.squares[index].ForeColor;
+
+                if (game.FirstClicked != null && game.SecondClicked != null)
+                {
+                    isProcessing = true;
+                }
             }
         }
 
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            timer.Stop();
+
+            foreach (var square in game.mismatchedSquares)
+            {
+                var label = lstLabels.FirstOrDefault(lbl => lbl.Tag is int index && game.squares[index] == square);
+                if (label != null)
+                {
+                    label.ForeColor = square.BackColor;
+                }
+            }
+
+            game.ResetClickedSquares();
+            isProcessing = false;
+        }
 
         private void BtnStart_Click(object? sender, EventArgs e)
         {
-            //AS Why do you need a try catch?
-
-            ClearBoard();
-            Start();
-
+            StartGame();
         }
     }
 }
-
