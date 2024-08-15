@@ -50,7 +50,7 @@ namespace MatchingMobile
                 timer.Start();
             }
         }
-
+//AS Move code out of event handler
         private void Timer_Tick(object? sender, EventArgs e)
         {
             timer.Stop();
@@ -68,7 +68,7 @@ namespace MatchingMobile
             activegame.ResetClickedSquares();
             isProcessing = false;
         }
-
+//AS Move code out of event handler
         private void btn_Clicked(object sender, EventArgs e)
         {
             if (isProcessing) return;
