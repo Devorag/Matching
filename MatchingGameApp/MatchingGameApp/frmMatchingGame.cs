@@ -28,7 +28,7 @@ namespace MatchingGame
             timer.Tick += Timer_Tick;
             BtnStart.Click += BtnStart_Click;
         }
-
+//AS Code is repeated in both windowsforms and maui add it to OOP
         private async Task Game_OnGameComplete()
         {
             if (isProcessing) return;
@@ -76,7 +76,8 @@ namespace MatchingGame
         {
             timer.Start();
         }
-
+//AS Move code out of event handler
+//AS This code is repeated in the windowsforms project and maui, make it OOP.
         private void Label_Click(object? sender, EventArgs e)
         {
             if (isProcessing) return;
@@ -92,7 +93,7 @@ namespace MatchingGame
                 }
             }
         }
-
+//AS Move code out of event hanlder
         private void Timer_Tick(object? sender, EventArgs e)
         {
             timer.Stop();
