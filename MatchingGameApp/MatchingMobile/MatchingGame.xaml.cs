@@ -5,7 +5,8 @@ namespace MatchingMobile
 {
     public partial class MatchingGame : ContentPage
     {
-        private Game game = new();
+        Game activegame;
+        List<Game> lstGame = new() { new Game(), new Game(), new Game() };
         private ObservableCollection<Button> lstButtons;
         private IDispatcherTimer timer;
         private bool isProcessing = false;
@@ -13,15 +14,19 @@ namespace MatchingMobile
         public MatchingGame()
         {
             InitializeComponent();
-            this.BindingContext = game;
+            Game1Rb.BindingContext = lstGame[0];
+            Game2Rb.BindingContext = lstGame[1];
+            Game3Rb.BindingContext = lstGame[2];
+            activegame = lstGame[0];
+            this.BindingContext = activegame;
             lstButtons = new ObservableCollection<Button> { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16 };
 
             timer = Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
 
-            game.OnMismatch += HandleMismatch;
-            game.OnGameComplete += async () => await Game_OnGameComplete();
+            activegame.OnMismatch += HandleMismatch;
+            activegame.OnGameComplete += async () => await Game_OnGameComplete();
 
             for (int i = 0; i < lstButtons.Count; i++)
             {
@@ -50,9 +55,9 @@ namespace MatchingMobile
         {
             timer.Stop();
 
-            foreach (var square in game.mismatchedSquares)
+            foreach (var square in activegame.mismatchedSquares)
             {
-                var buttonIndex = game.squares.IndexOf(square);
+                var buttonIndex = activegame.squares.IndexOf(square);
                 var button = lstButtons.FirstOrDefault(btn => btn.AutomationId == buttonIndex.ToString());
                 if (button != null)
                 {
@@ -60,7 +65,7 @@ namespace MatchingMobile
                 }
             }
 
-            game.ResetClickedSquares();
+            activegame.ResetClickedSquares();
             isProcessing = false;
         }
 
@@ -70,10 +75,10 @@ namespace MatchingMobile
 
             if (sender is Button button && int.TryParse(button.AutomationId, out int index))
             {
-                var square = game.squares[index];
-                game.HandleClick(square);
+                var square = activegame.squares[index];
+                activegame.HandleClick(square);
 
-                if (game.FirstClicked != null && game.SecondClicked != null)
+                if (activegame.FirstClicked != null && activegame.SecondClicked != null)
                 {
                     isProcessing = true;
                 }
@@ -83,7 +88,17 @@ namespace MatchingMobile
         private void StartBtn_Clicked_1(object sender, EventArgs e)
         {
             Messagelbl.Text = "";
-            game.StartGame();
+            activegame.StartGame();
+        }
+
+        private void Game_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            if (rb.IsChecked && rb.BindingContext != null)
+            {
+                activegame = (Game)rb.BindingContext;
+                this.BindingContext = activegame;
+            }
         }
     }
 }
