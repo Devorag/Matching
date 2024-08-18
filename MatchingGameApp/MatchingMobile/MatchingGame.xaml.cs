@@ -7,8 +7,8 @@ namespace MatchingMobile
     {
         Game activegame;
         List<Game> lstGame = new() { new Game(), new Game(), new Game() };
-        private ObservableCollection<Button> lstButtons;
-        private IDispatcherTimer timer;
+        ObservableCollection<Button> lstButtons;
+        IDispatcherTimer timer;
         private bool isProcessing = false;
 
         public MatchingGame()
@@ -26,20 +26,17 @@ namespace MatchingMobile
             timer.Tick += Timer_Tick;
 
             activegame.OnMismatch += HandleMismatch;
-            activegame.OnGameComplete += async () => await Game_OnGameComplete();
+            activegame.OnGameComplete += async () =>
+            {
+                if (isProcessing) return;
+                Messagelbl.Text = "Congratulations you won the game!";
+            };
 
             for (int i = 0; i < lstButtons.Count; i++)
             {
                 var button = lstButtons[i];
                 button.AutomationId = i.ToString();
             }
-        }
-
-        private async Task Game_OnGameComplete()
-        {
-            if (isProcessing) return;
-            await Task.Delay(200);
-            Messagelbl.Text = "Congratulations you won the game!";
         }
 
         private void HandleMismatch()
@@ -50,8 +47,8 @@ namespace MatchingMobile
                 timer.Start();
             }
         }
-//AS Move code out of event handler
-        private void Timer_Tick(object? sender, EventArgs e)
+
+        private void TimerTick()
         {
             timer.Stop();
 
@@ -68,6 +65,13 @@ namespace MatchingMobile
             activegame.ResetClickedSquares();
             isProcessing = false;
         }
+
+
+//AS Move code out of event handler
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            TimerTick();
+        }
 //AS Move code out of event handler
         private void btn_Clicked(object sender, EventArgs e)
         {
@@ -75,13 +79,8 @@ namespace MatchingMobile
 
             if (sender is Button button && int.TryParse(button.AutomationId, out int index))
             {
-                var square = activegame.squares[index];
-                activegame.HandleClick(square);
-
-                if (activegame.FirstClicked != null && activegame.SecondClicked != null)
-                {
-                    isProcessing = true;
-                }
+                activegame.HandleLabelClick(index);
+                isProcessing = activegame.FirstClicked != null && activegame.SecondClicked != null;
             }
         }
 
@@ -98,6 +97,12 @@ namespace MatchingMobile
             {
                 activegame = (Game)rb.BindingContext;
                 this.BindingContext = activegame;
+
+                for (int i = 0; i < lstButtons.Count; i++)
+                {
+                    var button = lstButtons[i];
+                    button.BindingContext = activegame.squares[i];
+                }
             }
         }
     }

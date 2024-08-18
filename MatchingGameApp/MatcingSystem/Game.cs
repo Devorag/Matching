@@ -8,6 +8,11 @@ namespace MatchingSystem
     {
         public System.Drawing.Color _backColor = System.Drawing.Color.CornflowerBlue;
         public System.Drawing.Color _foreColor = System.Drawing.Color.Black;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public event Action? OnMismatch;
+        public event Func<Task>? OnGameComplete;
+        public event EventHandler? GamesPlayed;
         public ObservableCollection<Square> squares { get; private set; } = new();
         public ObservableCollection<Square> mismatchedSquares = new();
 
@@ -17,15 +22,8 @@ namespace MatchingSystem
             "b", "b", "v", "v", "w", "w", "z", "z"
         };
         private Random random = new Random();
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public event Action? OnMismatch;
-        public event Action? OnGameComplete;
-
-
         public Square? FirstClicked { get; private set; }
         public Square? SecondClicked { get; private set; }
-
         public System.Drawing.Color SquareBackColor
         {
             get => _backColor;
@@ -39,7 +37,6 @@ namespace MatchingSystem
                 }
             }
         }
-
         public System.Drawing.Color SquareForeColor
         {
             get => _foreColor;
@@ -53,17 +50,23 @@ namespace MatchingSystem
                 }
             }
         }
-
         public Microsoft.Maui.Graphics.Color ForeColorMaui
         {
             get => this.ConvertToMauiColor(this.SquareForeColor);
         }
-
         public Microsoft.Maui.Graphics.Color BackColorMaui
         {
             get => this.ConvertToMauiColor(this.SquareBackColor);
         }
-
+        private static int numGames;
+        public static int NumGamesPlayed => numGames;
+        public Game()
+        {
+            numGames++;
+            this.GameName = "Game" + numGames;
+        }
+        public string GameName { get; set; }
+        public string GameHeader { get => this.GameName; }
         public void StartGame()
         {
             this.squares.Clear();
@@ -74,7 +77,6 @@ namespace MatchingSystem
             AssignIconsToSquares();
             OnPropertyChanged(nameof(squares));
         }
-
         private void AssignIconsToSquares()
         {
             var shuffledIcons = icons.OrderBy(x => random.Next()).ToList();
@@ -84,7 +86,6 @@ namespace MatchingSystem
                 this.squares[i].ForeColor = SquareBackColor;
             }
         }
-
         public void HandleClick(Square clickedSquare)
         {
             if (FirstClicked == null)
@@ -104,7 +105,6 @@ namespace MatchingSystem
                 }
             }
         }
-
         public void HandleLabelClick(int index)
         {
             if (index < 0 || index >= this.squares.Count) return;
@@ -112,12 +112,7 @@ namespace MatchingSystem
             Square clickedSquare = this.squares[index];
             HandleClick(clickedSquare);
 
-            if (IsGameComplete())
-            {
-                OnGameComplete?.Invoke();
-            }
         }
-
         private void CheckForMatch()
         {
             if (FirstClicked?.Text == SecondClicked?.Text)
@@ -133,7 +128,6 @@ namespace MatchingSystem
                 OnMismatch?.Invoke();
             }
         }
-
         public void ResetClickedSquares()
         {
             foreach (var square in mismatchedSquares)
@@ -144,23 +138,22 @@ namespace MatchingSystem
             FirstClicked = null;
             SecondClicked = null;
         }
-
         public bool IsGameComplete()
         {
             return squares.All(squares => squares.ForeColor == SquareForeColor);
         }
-
         public async Task HandleGameComplete()
         {
-            await Task.Delay(200); 
-            OnGameComplete?.Invoke();
+            await Task.Delay(200);
+            if (OnGameComplete != null)
+            {
+                await OnGameComplete();
+            }
         }
-
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         private Microsoft.Maui.Graphics.Color ConvertToMauiColor(System.Drawing.Color systemColor)
         {
             float red = systemColor.R / 255f;

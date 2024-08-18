@@ -16,7 +16,11 @@ namespace MatchingGame
             InitializeGameBoard();
 
             game.OnMismatch += HandleMismatch;
-            game.OnGameComplete += async () => await Game_OnGameComplete();
+            game.OnGameComplete += async () =>
+            {
+                if (isProcessing) return;
+                MessageBox.Show("Congratulations! You've matched all the cards!", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            };
 
             for (int i = 0; i < lstLabels.Count; i++)
             {
@@ -27,14 +31,11 @@ namespace MatchingGame
 
             timer.Tick += Timer_Tick;
             BtnStart.Click += BtnStart_Click;
+
+            
         }
-//AS Code is repeated in both windowsforms and maui add it to OOP
-        private async Task Game_OnGameComplete()
-        {
-            if (isProcessing) return;
-            await Task.Delay(200);
-            MessageBox.Show("Congratulations! You've matched all the cards!", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+////AS Code is repeated in both windowsforms and maui add it to OOP
+
 
         private void InitializeGameBoard()
         {
@@ -76,25 +77,8 @@ namespace MatchingGame
         {
             timer.Start();
         }
-//AS Move code out of event handler
-//AS This code is repeated in the windowsforms project and maui, make it OOP.
-        private void Label_Click(object? sender, EventArgs e)
-        {
-            if (isProcessing) return;
 
-            if (sender is Label clickedLabel && clickedLabel.Tag is int index)
-            {
-                game.HandleLabelClick(index);
-                clickedLabel.ForeColor = game.squares[index].ForeColor;
-
-                if (game.FirstClicked != null && game.SecondClicked != null)
-                {
-                    isProcessing = true;
-                }
-            }
-        }
-//AS Move code out of event hanlder
-        private void Timer_Tick(object? sender, EventArgs e)
+        private void TimerTick()
         {
             timer.Stop();
 
@@ -109,6 +93,21 @@ namespace MatchingGame
 
             game.ResetClickedSquares();
             isProcessing = false;
+        }
+//AS Move code out of event handler
+//AS This code is repeated in the windowsforms project and maui, make it OOP.
+        private void Label_Click(object? sender, EventArgs e)
+        {
+            if (isProcessing || !(sender is Label clickedLabel) || !(clickedLabel.Tag is int index)) return;
+
+            game.HandleLabelClick(index);
+            clickedLabel.ForeColor = game.squares[index].ForeColor;
+            isProcessing = game.FirstClicked != null && game.SecondClicked != null;
+        }
+//AS Move code out of event hanlder
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            TimerTick();
         }
 
         private void BtnStart_Click(object? sender, EventArgs e)

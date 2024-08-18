@@ -13,15 +13,16 @@
     </ContentPage.Resources>
 
     <Grid ColumnDefinitions ="*,*" RowDefinitions="Auto,*,2*">
-        <Label x:Name="Messagelbl" Grid.Column="0"  Grid.Row="0" Grid.ColumnSpan="2" FontSize="Medium" TextColor="Red" />
-        <VerticalStackLayout Grid.Column="0" Grid.Row="1" Margin="4">
-            <Label Text="3 simultaneous games." />
-            <Label Text="Choose which one to play" />
-            <RadioButton x:Name="Game1Rb" Content="{Binding GameStatusDescription}" CheckedChanged="Game_CheckedChanged" IsChecked="True"/>
-            <RadioButton x:Name="Game2Rb" Content="{Binding GameStatusDescription}" CheckedChanged="Game_CheckedChanged"/>
-            <RadioButton x:Name="Game3Rb" Content="{Binding GameStatusDescription}" CheckedChanged="Game_CheckedChanged"/>
-        </VerticalStackLayout>
-        <Button x:Name="StartBtn" Margin="2" Grid.Column="1" Grid.Row="1" Text="Click here to start" FontSize="Large" TextTransform="Uppercase" TextColor="white" BackgroundColor="MediumAquamarine"  HorizontalOptions="FillAndExpand" Clicked="StartBtn_Clicked_1"/>
+        <Label x:Name="Messagelbl" Grid.Column="0"  Grid.Row="0" Grid.ColumnSpan="2" FontSize="Medium" TextColor="Red" HorizontalOptions="Center"/>
+        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label Text="3 simultaneous games." Grid.Row="0" Grid.Column="0" />
+            <Label Text="Choose which one to play" Grid.Row="1" Grid.Column="0" />
+            <RadioButton x:Name="Game1Rb" Content="Game 1" CheckedChanged="Game_CheckedChanged" IsChecked="True" Grid.Row="2" Grid.Column="0"/>
+            <RadioButton x:Name="Game2Rb" Content="Game 2" CheckedChanged="Game_CheckedChanged" Grid.Row="3" Grid.Column="0"/>
+            <RadioButton x:Name="Game3Rb" Content="Game 3" CheckedChanged="Game_CheckedChanged" Grid.Row="4" Grid.Column="0"/>
+            <Label BindingContext="{Binding activegame}" Text="{Binding GameMode}" Grid.Row="0" Grid.Column="1" />
+            <Button x:Name="StartBtn" Margin="2" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Text="Click here to start" FontSize="Large" TextTransform="Uppercase" TextColor="white" BackgroundColor="MediumAquamarine" Clicked="StartBtn_Clicked_1" />
+        </Grid>
         <Grid Margin="2" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*" ColumnSpacing="2" RowSpacing="2" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <Button x:Name="btn1" Grid.Column="0" Grid.Row="0" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[0]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}"  Clicked="btn_Clicked"/>
             <Button x:Name="btn2" Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=game-button}" BindingContext="{Binding squares[1]}" BackgroundColor="{Binding BackColorMaui}" TextColor="{Binding ForeColorMaui}" Text="{Binding Text}" Clicked="btn_Clicked"/>
