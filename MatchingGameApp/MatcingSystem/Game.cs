@@ -63,19 +63,27 @@ namespace MatchingSystem
         public Game()
         {
             numGames++;
-            this.GameName = "Game" + numGames;
+            this.GameName = "Game" + NumGamesPlayed;
         }
         public string GameName { get; set; }
         public string GameHeader { get => this.GameName; }
+        public bool IsGameComplete()
+        {
+            return squares.All(squares => squares.ForeColor == SquareForeColor);
+        }
         public void StartGame()
         {
             this.squares.Clear();
             for (int i = 0; i < 16; i++)
             {
-                this.squares.Add(new Square { BackColor = _backColor });
+                this.squares.Add(new Square
+                {
+                    BackColor = SquareBackColor,
+                    ForeColor = SquareForeColor
+                });
             }
             AssignIconsToSquares();
-            OnPropertyChanged(nameof(squares));
+            OnPropertyChanged("squares");
         }
         private void AssignIconsToSquares()
         {
@@ -88,6 +96,10 @@ namespace MatchingSystem
         }
         public void HandleClick(Square clickedSquare)
         {
+            if (clickedSquare.IsMatched || clickedSquare.ForeColor == SquareForeColor)
+            {
+                return;
+            }
             if (FirstClicked == null)
             {
                 FirstClicked = clickedSquare;
@@ -97,7 +109,21 @@ namespace MatchingSystem
             {
                 SecondClicked = clickedSquare;
                 SecondClicked.ForeColor = SquareForeColor;
-                CheckForMatch();
+                if (CheckForMatch())
+                {
+                    FirstClicked.IsMatched = true;
+                    SecondClicked.IsMatched = true;
+                }
+                else
+                {
+                    mismatchedSquares.Clear();
+                    mismatchedSquares.Add(FirstClicked);
+                    mismatchedSquares.Add(SecondClicked);
+                    OnMismatch?.Invoke();
+                }
+
+                FirstClicked = null;
+                SecondClicked = null;
 
                 if (IsGameComplete())
                 {
@@ -113,42 +139,18 @@ namespace MatchingSystem
             HandleClick(clickedSquare);
 
         }
-        private void CheckForMatch()
+        private bool CheckForMatch()
         {
-            if (FirstClicked?.Text == SecondClicked?.Text)
-            {
-                FirstClicked = null;
-                SecondClicked = null;
-            }
-            else
-            {
-                mismatchedSquares.Clear();
-                mismatchedSquares.Add(FirstClicked);
-                mismatchedSquares.Add(SecondClicked);
-                OnMismatch?.Invoke();
-            }
+            return FirstClicked?.Text == SecondClicked?.Text;
         }
-        public void ResetClickedSquares()
+        public async void ResetClickedSquares()
         {
+            await Task.Delay(100); 
             foreach (var square in mismatchedSquares)
             {
                 square.ForeColor = square.BackColor;
             }
             mismatchedSquares.Clear();
-            FirstClicked = null;
-            SecondClicked = null;
-        }
-        public bool IsGameComplete()
-        {
-            return squares.All(squares => squares.ForeColor == SquareForeColor);
-        }
-        public async Task HandleGameComplete()
-        {
-            await Task.Delay(200);
-            if (OnGameComplete != null)
-            {
-                await OnGameComplete();
-            }
         }
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {

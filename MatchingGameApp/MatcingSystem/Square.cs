@@ -71,6 +71,21 @@ namespace MatchingSystem
             ForeColor = BackColor;
         }
 
+        private bool _isMatched;
+
+        public bool IsMatched
+        {
+            get => _isMatched;
+            set
+            {
+                if (_isMatched != value)
+                {
+                    _isMatched = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
