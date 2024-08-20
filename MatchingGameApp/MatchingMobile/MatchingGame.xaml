@@ -18,7 +18,7 @@
             <Label Text="3 simultaneous games." Grid.Row="0" Grid.Column="0" />
             <Label Text="Choose which one to play" Grid.Row="1" Grid.Column="0" />
             <RadioButton x:Name="Game1Rb" Content="Game 1" CheckedChanged="Game_CheckedChanged" IsChecked="True" Grid.Row="2" Grid.Column="0"/>
-            <RadioButton x:Name="Game2Rb" Content="Game 2" CheckedChanged="Game_CheckedChanged" Grid.Row="3" Grid.Column="0"/>
+            <RadioButton x:Name="Game2Rb" Content="Game 2" CheckedChanged="Game_CheckedChanged"  Grid.Row="3" Grid.Column="0"/>
             <RadioButton x:Name="Game3Rb" Content="Game 3" CheckedChanged="Game_CheckedChanged" Grid.Row="4" Grid.Column="0"/>
             <Label BindingContext="{Binding activegame}" Text="{Binding GameMode}" Grid.Row="0" Grid.Column="1" />
             <Button x:Name="StartBtn" Margin="2" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Text="Click here to start" FontSize="Large" TextTransform="Uppercase" TextColor="white" BackgroundColor="MediumAquamarine" Clicked="StartBtn_Clicked_1" />

@@ -36,6 +36,7 @@ namespace MatchingMobile
             {
                 var button = lstButtons[i];
                 button.AutomationId = i.ToString();
+
             }
         }
 
@@ -64,15 +65,31 @@ namespace MatchingMobile
 
             activegame.ResetClickedSquares();
             isProcessing = false;
+            EnableAllButtons();
+        }
+        private void DisableAllButtons()
+        {
+            foreach (var button in lstButtons) { button.IsEnabled = false;}
         }
 
+        private void EnableAllButtons()
+        {
+            foreach (var button in lstButtons)
+            {
+                var buttonIndex = int.Parse(button.AutomationId);
+                if (!activegame.squares[buttonIndex].IsMatched)
+                {
+                    button.IsEnabled = true;
+                }
+            }
+        }
 
-//AS Move code out of event handler
+        //AS Move code out of event handler
         private void Timer_Tick(object? sender, EventArgs e)
         {
             TimerTick();
         }
-//AS Move code out of event handler
+        //AS Move code out of event handler
         private void btn_Clicked(object sender, EventArgs e)
         {
             if (isProcessing) return;
@@ -80,7 +97,11 @@ namespace MatchingMobile
             if (sender is Button button && int.TryParse(button.AutomationId, out int index))
             {
                 activegame.HandleLabelClick(index);
-                isProcessing = activegame.FirstClicked != null && activegame.SecondClicked != null;
+                if (activegame.FirstClicked != null && activegame.SecondClicked != null)
+                {
+                    DisableAllButtons();
+                    isProcessing = true;
+                }
             }
         }
 
@@ -97,12 +118,6 @@ namespace MatchingMobile
             {
                 activegame = (Game)rb.BindingContext;
                 this.BindingContext = activegame;
-
-                for (int i = 0; i < lstButtons.Count; i++)
-                {
-                    var button = lstButtons[i];
-                    button.BindingContext = activegame.squares[i];
-                }
             }
         }
     }
