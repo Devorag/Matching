@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace MatchingSystem
@@ -8,11 +9,22 @@ namespace MatchingSystem
     {
         public System.Drawing.Color _backColor = System.Drawing.Color.CornflowerBlue;
         public System.Drawing.Color _foreColor = System.Drawing.Color.Black;
+        private int numGames; 
+        public int NumGames
+        {
+            get => numGames;
+            private set
+            {
+                numGames = value;
+                this.OnPropertyChanged("NumGames");
+                this.OnPropertyChanged("GameModeHeader");
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
         public event Action? OnMismatch;
         public event Func<Task>? OnGameComplete;
-        public event EventHandler? GamesPlayed;
         public ObservableCollection<Square> squares { get; private set; } = new();
         public ObservableCollection<Square> mismatchedSquares = new();
 
@@ -58,21 +70,17 @@ namespace MatchingSystem
         {
             get => this.ConvertToMauiColor(this.SquareBackColor);
         }
-        private static int numGames;
-        public static int NumGamesPlayed => numGames;
-        public Game()
-        {
-            numGames++;
-            this.GameName = "Game" + NumGamesPlayed;
-        }
-        public string GameName { get; set; }
-        public string GameHeader { get => this.GameName; }
+
         public bool IsGameComplete()
         {
-            return squares.All(squares => squares.ForeColor == SquareForeColor);
+            return squares.All(squares => squares.IsMatched);
         }
+        public string GameModeHeader  => $"Number Game Playing: {numGames}"; 
+
         public void StartGame()
         {
+            NumGames++;
+            OnPropertyChanged("GameModeHeader");
             this.squares.Clear();
             for (int i = 0; i < 16; i++)
             {

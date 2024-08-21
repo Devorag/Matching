@@ -26,11 +26,8 @@ namespace MatchingMobile
             timer.Tick += Timer_Tick;
 
             activegame.OnMismatch += HandleMismatch;
-            activegame.OnGameComplete += async () =>
-            {
-                if (isProcessing) return;
-                Messagelbl.Text = "Congratulations you won the game!";
-            };
+            activegame.OnGameComplete += HandleGameComplete;
+
 
             for (int i = 0; i < lstButtons.Count; i++)
             {
@@ -69,7 +66,7 @@ namespace MatchingMobile
         }
         private void DisableAllButtons()
         {
-            foreach (var button in lstButtons) { button.IsEnabled = false;}
+            foreach (var button in lstButtons) { button.IsEnabled = false; }
         }
 
         private void EnableAllButtons()
@@ -113,12 +110,24 @@ namespace MatchingMobile
 
         private void Game_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            RadioButton rb = (RadioButton)sender;
-            if (rb.IsChecked && rb.BindingContext != null)
+            if (e.Value)
             {
-                activegame = (Game)rb.BindingContext;
-                this.BindingContext = activegame;
+                RadioButton rb = (RadioButton)sender;
+                if (rb.BindingContext is Game selectedGame)
+                {
+                    activegame.OnMismatch -= HandleMismatch;
+                    activegame.OnGameComplete -= HandleGameComplete;
+                    activegame = selectedGame;
+                    activegame.OnMismatch += HandleMismatch;
+                    activegame.OnGameComplete += HandleGameComplete;
+                    this.BindingContext = activegame;
+                }
             }
+        }
+        private async Task HandleGameComplete()
+        {   
+            Messagelbl.Text = "Congratulations! You've won the game!";
+            await Task.CompletedTask;
         }
     }
 }
