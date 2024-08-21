@@ -36,7 +36,6 @@ namespace MatchingMobile
 
             }
         }
-
         private void HandleMismatch()
         {
             if (!isProcessing)
@@ -45,7 +44,6 @@ namespace MatchingMobile
                 timer.Start();
             }
         }
-
         private void TimerTick()
         {
             timer.Stop();
@@ -80,7 +78,21 @@ namespace MatchingMobile
                 }
             }
         }
-
+        private void HideButtons()
+        {
+            foreach (var button in lstButtons)
+            {
+                button.IsVisible = false;
+            }
+        }
+        private void ShowButtons()
+        {
+            foreach (var button in lstButtons)
+            {
+                button.IsVisible = true;
+            }
+        }
+ 
         private void Timer_Tick(object? sender, EventArgs e)
         {
             TimerTick();
@@ -104,6 +116,7 @@ namespace MatchingMobile
         {
             Messagelbl.Text = "";
             activegame.StartGame();
+            ShowButtons();
         }
 
         private void Game_CheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -115,10 +128,16 @@ namespace MatchingMobile
                 {
                     activegame.OnMismatch -= HandleMismatch;
                     activegame.OnGameComplete -= HandleGameComplete;
+                    HideButtons();
                     activegame = selectedGame;
+                    this.BindingContext = activegame;
                     activegame.OnMismatch += HandleMismatch;
                     activegame.OnGameComplete += HandleGameComplete;
-                    this.BindingContext = activegame;
+                    if (activegame.NumGames > 0)
+                    {
+                        ShowButtons();
+                    }
+
                 }
             }
         }

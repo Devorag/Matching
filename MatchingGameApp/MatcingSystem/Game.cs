@@ -25,7 +25,7 @@ namespace MatchingSystem
 
         public event Action? OnMismatch;
         public event Func<Task>? OnGameComplete;
-        public ObservableCollection<Square> squares { get; private set; } = new();
+        public ObservableCollection<Square> squares { get; set; } = new();
         public ObservableCollection<Square> mismatchedSquares = new();
 
         List<string> icons = new()
