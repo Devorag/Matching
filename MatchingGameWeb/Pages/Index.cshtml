@@ -1,0 +1,56 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Matching Game</h1>
+    <p>Created by: Devora Goldenberg</p>
+    <h3>Overview</h3>
+    <p>
+        This document describes requirements for the software implementation of the classing game of
+        Matching. This software will allow one player to play. A description of the game plus the requirements
+        of this implementation are provided below.
+    </p>
+    <h3>The game</h3>
+    <p>
+        One player is presented with a 4x4 grid of turned over “cards”. The cards have icons that are only
+        displayed once the player chooses that card. The player chooses two cards in attempt to find a match,
+        meaning two cards with identical icons. Once the player finds all the matches, a message box will show
+        that the player has won the game.
+    </p>
+    <h3>Software Implementation <br />UI Elements</h3>
+    <p>
+        The software will present the Matching game a 4x4 Grid of labels and a Start Button on top of the screen.
+    </p>
+    <h3>Player Modes</h3>
+    <p>This game is a Self - Player game only</p>
+    <h3>Game Process and Rules</h3>
+    <ul>
+        <li>
+            The game starts when the player clicks the Start button. Until then all labels on the grid are
+            disabled.
+        </li>
+        <li>
+            Once start is clicked, the player begins to select any two labels on the grid. When a label is
+            selected, an icon appears.
+        </li>
+        <li>
+            If the two labels display identical icons, the cards will remain uncovered. The player then selects
+            two more cards.
+        </li>
+        <li>
+            If the two labels don’t display identical icons, the icons will disappear and the player then selects
+            two more cards.
+        </li>
+        <li>
+            Once the player finds all the correct matches, a message will show that the player has won the
+            game.
+        </li>
+        <li>
+            • If the user clicks Start in middle of a game, then the game should interrupt and begin a new
+            game.
+        </li>
+</ul>
+</div>

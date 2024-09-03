@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchingGameApp", "Matching
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchingMobile", "MatchingMobile\MatchingMobile.csproj", "{DE4386F3-6BE8-43E8-A8FB-74213DB357C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchingSystem", "MatcingSystem\MatchingSystem.csproj", "{53F30500-D878-4CF5-8EB9-6E65F45D72FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchingSystem", "MatcingSystem\MatchingSystem.csproj", "{53F30500-D878-4CF5-8EB9-6E65F45D72FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchingTest", "MatchingTest\MatchingTest.csproj", "{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchingTest", "MatchingTest\MatchingTest.csproj", "{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchingGameWeb", "..\MatchingGameWeb\MatchingGameWeb.csproj", "{9CB9D5CF-4DA4-4B6C-9E37-A82A7D654149}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0AB091F-3AF5-41CC-A01C-EEC1C6F20021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CB9D5CF-4DA4-4B6C-9E37-A82A7D654149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CB9D5CF-4DA4-4B6C-9E37-A82A7D654149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CB9D5CF-4DA4-4B6C-9E37-A82A7D654149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CB9D5CF-4DA4-4B6C-9E37-A82A7D654149}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

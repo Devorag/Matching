@@ -1,0 +1,135 @@
+﻿@page
+@model MatchingGameWeb.Pages.Matching_GameModel
+@{
+}
+<div class="row">
+    <div class="col-4">
+        <button class="btn btn-info" id="btnStart" onclick="startGame()">Click here to Start Game</button>
+    </div>
+</div>
+<div class="row">
+    <table style="margin-top: 20px">
+        <tr>
+            <td>
+                <button class="square" id="sq0"></button>
+            </td>
+            <td>
+                <button class="square" id="sq1"></button>
+            </td>
+            <td>
+                <button class="square" id="sq2"></button>
+            </td>
+            <td>
+                <button class="square" id="sq3"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="square" id="sq4"></button>
+            </td>
+            <td>
+                <button class="square" id="sq5"></button>
+            </td>
+            <td>
+                <button class="square" id="sq6"></button>
+            </td>
+            <td>
+                <button class="square" id="sq7"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="square" id="sq8"></button>
+            </td>
+            <td>
+                <button class="square" id="sq9"></button>
+            </td>
+            <td>
+                <button class="square" id="sq10"></button>
+            </td>
+            <td>
+                <button class="square" id="sq11"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="square" id="sq12"></button>
+            </td>
+            <td>
+                <button class="square" id="sq13"></button>
+            </td>
+            <td>
+                <button class="square" id="sq14"></button>
+            </td>
+            <td>
+                <button class="square" id="sq15"></button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    const allSquares = [...document.querySelectorAll(".square")];
+    const icons = ["🍎", "🍌", "🍇", "🍓", "🍎", "🍌", "🍇", "🍓", "🍍", "🍉", "🍒", "🍋", "🍍", "🍉", "🍒", "🍋"];
+    let firstClicked = null;
+    let secondClicked = null;
+    let gameStarted = false;
+
+    function startGame() {
+        gameStarted = true;
+        shuffleIcons();
+        resetBoard();
+        allSquares.forEach(sq => sq.addEventListener("click", handleSquareClick));
+    }
+
+    function shuffleIcons() {
+        icons.sort(() => Math.random() - .5); 
+    }
+
+    function resetBoard() {
+        allSquares.forEach(sq => {
+            sq.textContent = "";
+            sq.classList.remove("matched");
+            sq.disabled = false;
+        });
+        firstClicked = null;
+        secondClicked = null;
+    }
+
+    function handleSquareClick(event) {
+        if (!gameStarted || event.target.classList.contains("matched") || event.target === firstClicked) return;
+
+        const index = allSquares.indexOf(event.target);
+        event.target.textContent = icons[index];
+
+        if (!firstClicked) {
+            firstClicked = event.target;
+        } else {
+            secondClicked = event.target;
+            checkMatch();
+        }
+    }
+
+    function checkMatch() {
+        if (firstClicked.textContent === secondClicked.textContent) {
+            firstClicked.classList.add("matched");
+            secondClicked.classList.add("matched");
+            firstClicked = null;
+            secondClicked = null;
+            checkGameComplete();
+        } else {
+            setTimeout(() => {
+                firstClicked.textContent = "";
+                secondClicked.textContent = "";
+                firstClicked = null;
+                secondClicked = null;
+            }, 1000);
+        }
+    }
+
+    function checkGameComplete() {
+        if (allSquares.every(sq => sq.classList.contains("matched"))) {
+            setTimeout(() => alert("Congratulations! You've matched all the cards!"), 100);
+        }
+    }
+</script>
