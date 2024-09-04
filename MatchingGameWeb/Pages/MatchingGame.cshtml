@@ -74,6 +74,7 @@
     let firstClicked = null;
     let secondClicked = null;
     let gameStarted = false;
+    let processingTurn = false;
 
     function startGame() {
         gameStarted = true;
@@ -92,12 +93,11 @@
             sq.classList.remove("matched");
             sq.disabled = false;
         });
-        firstClicked = null;
-        secondClicked = null;
+        resetTurn();
     }
 
     function handleSquareClick(event) {
-        if (!gameStarted || event.target.classList.contains("matched") || event.target === firstClicked) return;
+        if (!gameStarted || event.target.classList.contains("matched") || processingTurn || event.target === firstClicked) return;
 
         const index = allSquares.indexOf(event.target);
         event.target.textContent = icons[index];
@@ -106,6 +106,7 @@
             firstClicked = event.target;
         } else {
             secondClicked = event.target;
+            processingTurn = true;
             checkMatch();
         }
     }
@@ -114,17 +115,21 @@
         if (firstClicked.textContent === secondClicked.textContent) {
             firstClicked.classList.add("matched");
             secondClicked.classList.add("matched");
-            firstClicked = null;
-            secondClicked = null;
+            resetTurn();
             checkGameComplete();
         } else {
             setTimeout(() => {
                 firstClicked.textContent = "";
                 secondClicked.textContent = "";
-                firstClicked = null;
-                secondClicked = null;
+                resetTurn();
             }, 1000);
         }
+    }
+
+    function resetTurn() {
+        firstClicked = null;
+        secondClicked = null;
+        processingTurn = false;
     }
 
     function checkGameComplete() {
