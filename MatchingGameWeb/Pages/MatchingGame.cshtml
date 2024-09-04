@@ -84,7 +84,7 @@
     }
 
     function shuffleIcons() {
-        icons.sort(() => Math.random() - .5); 
+        icons.sort(() => Math.random() - .5);
     }
 
     function resetBoard() {
@@ -134,7 +134,15 @@
 
     function checkGameComplete() {
         if (allSquares.every(sq => sq.classList.contains("matched"))) {
-            setTimeout(() => alert("Congratulations! You've matched all the cards!"), 100);
+            setTimeout(() => {
+                Swal.fire({
+                    title: 'Game Over',
+                    text: "Congratulations! You've matched all the cards!",
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            }, 100);
         }
+
     }
 </script>
