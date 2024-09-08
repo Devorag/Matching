@@ -1,0 +1,154 @@
+﻿@page
+@model MatchingGameWeb.Pages.MatchingGameJqueryModel
+@{
+}
+
+<div class="row">
+    <div class="col-4">
+        <button class="btn btn-info" id="btnStart" onclick="startGame()">Click here to Start Game</button>
+    </div>
+</div>
+<div class="row">
+    <table style="margin-top: 20px">
+        <tr>
+            <td>
+                <button class="square" id="sq0"></button>
+            </td>
+            <td>
+                <button class="square" id="sq1"></button>
+            </td>
+            <td>
+                <button class="square" id="sq2"></button>
+            </td>
+            <td>
+                <button class="square" id="sq3"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="square" id="sq4"></button>
+            </td>
+            <td>
+                <button class="square" id="sq5"></button>
+            </td>
+            <td>
+                <button class="square" id="sq6"></button>
+            </td>
+            <td>
+                <button class="square" id="sq7"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="square" id="sq8"></button>
+            </td>
+            <td>
+                <button class="square" id="sq9"></button>
+            </td>
+            <td>
+                <button class="square" id="sq10"></button>
+            </td>
+            <td>
+                <button class="square" id="sq11"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="square" id="sq12"></button>
+            </td>
+            <td>
+                <button class="square" id="sq13"></button>
+            </td>
+            <td>
+                <button class="square" id="sq14"></button>
+            </td>
+            <td>
+                <button class="square" id="sq15"></button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        let allSquares;
+        let icons;
+        let firstClicked = null;
+        let secondClicked = null;
+        let gameStarted = false;
+        let processingTurn = false;
+
+        $(document).ready(function () {
+           allSquares = [...document.querySelectorAll(".square")];
+           icons = ["🍎", "🍌", "🍇", "🍓", "🍎", "🍌", "🍇", "🍓", "🍍", "🍉", "🍒", "🍋", "🍍", "🍉", "🍒", "🍋"];
+        });
+
+        function startGame() {
+            gameStarted = true;
+            shuffleIcons();
+            resetBoard();
+            $(allSquares).click(handleSquareClick);
+        }
+
+        function shuffleIcons() {
+            icons.sort(() => Math.random() - .5);
+        }
+
+        function resetBoard() {
+            $(allSquares).text("").removeClass("matched").prop("disabled", false);
+            resetTurn();
+        }
+
+        function handleSquareClick(event) {
+            if (!gameStarted || event.target.classList.contains("matched") || processingTurn || event.target === firstClicked) return;
+
+            const index = allSquares.indexOf(event.target);
+            event.target.textContent = icons[index];
+
+            if (!firstClicked) {
+                firstClicked = event.target;
+            } else {
+                secondClicked = event.target;
+                processingTurn = true;
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            if (firstClicked.textContent === secondClicked.textContent) {
+                firstClicked.classList.add("matched");
+                secondClicked.classList.add("matched");
+                resetTurn();
+                checkGameComplete();
+            } else {
+                setTimeout(() => {
+                    firstClicked.textContent = "";
+                    secondClicked.textContent = "";
+                    resetTurn();
+                }, 1000);
+            }
+        }
+
+        function resetTurn() {
+            firstClicked = null;
+            secondClicked = null;
+            processingTurn = false;
+        }
+
+        function checkGameComplete() {
+            if (allSquares.every(sq => sq.classList.contains("matched"))) {
+                setTimeout(() => {
+                    Swal.fire({
+                        title: 'Game Over',
+                        text: "Congratulations! You've matched all the cards!",
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                }, 100);
+            }
+
+        }
+    </script>
+}
