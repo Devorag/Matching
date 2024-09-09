@@ -81,7 +81,7 @@
         let processingTurn = false;
 
         $(document).ready(function () {
-           allSquares = [...document.querySelectorAll(".square")];
+           allSquares = $(".square");
            icons = ["🍎", "🍌", "🍇", "🍓", "🍎", "🍌", "🍇", "🍓", "🍍", "🍉", "🍒", "🍋", "🍍", "🍉", "🍒", "🍋"];
         });
 
@@ -97,48 +97,48 @@
         }
 
         function resetBoard() {
-            $(allSquares).text("").removeClass("matched").prop("disabled", false);
+            allSquares.text("").removeClass("matched").prop("disabled", false);
             resetTurn();
         }
 
-        function handleSquareClick(event) {
-            if (!gameStarted || event.target.classList.contains("matched") || processingTurn || event.target === firstClicked) return;
+        function handleSquareClick() {
+            if (!gameStarted || $(this).hasClass("matched") || processingTurn || $(this).is($firstClicked)) return;
 
-            const index = allSquares.indexOf(event.target);
-            event.target.textContent = icons[index];
+            const index = allSquares.index(this);
+            $(this).text(icons[index]);
 
-            if (!firstClicked) {
-                firstClicked = event.target;
+            if (!$firstClicked) {
+                $firstClicked = $(this);
             } else {
-                secondClicked = event.target;
+                $secondClicked = $(this);
                 processingTurn = true;
                 checkMatch();
             }
         }
 
         function checkMatch() {
-            if (firstClicked.textContent === secondClicked.textContent) {
-                firstClicked.classList.add("matched");
-                secondClicked.classList.add("matched");
+            if ($firstClicked.text() === $secondClicked.text()) {
+                $firstClicked.addClass("matched");
+                $secondClicked.addClass("matched");
                 resetTurn();
                 checkGameComplete();
             } else {
                 setTimeout(() => {
-                    firstClicked.textContent = "";
-                    secondClicked.textContent = "";
+                    $firstClicked.text("");
+                    $secondClicked.text("");
                     resetTurn();
                 }, 1000);
             }
         }
 
         function resetTurn() {
-            firstClicked = null;
-            secondClicked = null;
+            $firstClicked = null;
+            $secondClicked = null;
             processingTurn = false;
         }
 
         function checkGameComplete() {
-            if (allSquares.every(sq => sq.classList.contains("matched"))) {
+            if (allSquares.filter(".matched").length === allSquares.length) {
                 setTimeout(() => {
                     Swal.fire({
                         title: 'Game Over',
